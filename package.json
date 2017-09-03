@@ -1,0 +1,23 @@
+{
+  "name": "certificationy-applicant",
+  "version": "1.0.0",
+  "description": "Applicant",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "keywords": [
+    "Applicant",
+    "Certificationy"
+  ],
+  "author": "Michael COULLERET <michael.coulleret@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.4.2",
+    "vue-cli": "^2.8.2"
+  }
+}

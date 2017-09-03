@@ -1,0 +1,27 @@
+{
+    "name": "certificationy/applicant",
+    "description": "Applicant",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael COULLERET",
+            "email": "michael.coulleret@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-expressive": "^2.0",
+        "zendframework/zend-expressive-fastroute": "^2.1",
+        "php-di/php-di": "^5.4",
+        "middlewares/whoops": "^0.4.1",
+        "certificationy/certificationy": "^2.0",
+        "certificationy/php-pack": "^1.4",
+        "symfony/yaml": "^3.3",
+        "monolog/monolog": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Applicant\\": "src"
+        }
+    }
+}
