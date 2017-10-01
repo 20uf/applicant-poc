@@ -31,7 +31,7 @@ return [
     AssetHelper::class => DI\object()
         ->constructor(
             '../public/build/manifest.json',
-            '/dist/'
+            '/build/'
         ),
     YamlLoader::class => DI\object()
         ->constructorParameter('paths', ["../vendor/certificationy/php-pack/data"]),

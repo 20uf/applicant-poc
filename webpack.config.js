@@ -26,7 +26,7 @@ if (!dev) {
         options: {
             sourceMap: 'inline',
             config: {
-                path: './build/postcss.config.js'
+                path: './postcss.config.js'
             }
         }
     });
@@ -41,9 +41,9 @@ let config = {
     },
     watch: dev,
     output: {
-        path: path.resolve("./public/dist"),
+        path: path.resolve("./public/build"),
         filename: dev ? "[name].js" : "[name].[chunkhash:8].js",
-        publicPath: (dev ? appConfig.host + ":" + appConfig.port : "") + "/dist/"
+        publicPath: (dev ? appConfig.host + ":" + appConfig.port : "") + "/build/"
     },
     devtool: "inline-source-map",
     devServer: {
@@ -155,7 +155,7 @@ let config = {
             "_": "lodash",
             "window._": "lodash"
         }),
-        new CleanWebpackPlugin(["dist"], {
+        new CleanWebpackPlugin(["build"], {
             root: path.resolve("./public/"),
             verbose: true,
             dry: false

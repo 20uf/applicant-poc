@@ -36,7 +36,7 @@ class FrontAction implements MiddlewareInterface
     public function process(Request $request, DelegateInterface $delegate): HtmlResponse
     {
         $mainCss = $this->assetHelper->getAssetUrl('app.css');
-        $mainJs = $this->assetHelper->getAssetUrl('main.js');
+        $mainJs = $this->assetHelper->getAssetUrl('app.js');
 
         return new HtmlResponse('
             <!DOCTYPE html>
