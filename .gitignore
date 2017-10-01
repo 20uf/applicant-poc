@@ -5,10 +5,10 @@
 # Cache & logs & builds
 /var/
 !/var/.gitkeep
-/public/dist/
+/public/build/
 
 # IDE conf
-/.idea
+.idea
 .buildpath
 .project
 .settings/
