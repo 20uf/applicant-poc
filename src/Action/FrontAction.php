@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Diactoros\Response\HtmlResponse;
 
 /**
- * Api action.
+ * Front action.
  */
 class FrontAction implements MiddlewareInterface
 {

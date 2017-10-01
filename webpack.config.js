@@ -5,7 +5,7 @@ const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const dev = process.env.NODE_ENV === "dev";
+const dev = true; //process.env.NODE_ENV === "dev";
 
 let appConfig = {
     port: 7004,

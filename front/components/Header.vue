@@ -11,7 +11,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand logo" href="/">
-                            <img src="/dist/static/logo.png" class="img-responsive hidden-sm">
+                            <img src="/build/static/logo.png" class="img-responsive hidden-sm">
                         </a>
                     </div>
                 </div>
@@ -19,10 +19,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <router-link :to="{ name: 'monitoring', params: {provider: 'social_live'}}" >Social Live</router-link>
-                            </li>
-                            <li>
-                                <router-link :to="{ name: 'monitoring', params: {provider: 'novius'}}" >Novius</router-link>
+                                <router-link :to="{ name: 'categories'}" >New test</router-link>
                             </li>
                         </ul>
                     </div>

@@ -6,7 +6,7 @@ const mutations = {
     'FETCH_QUESTIONS' (state, response) {
         state.questions = response.data;
     },
-    'FETCH_FAILURE' (state, error) {
+    'FETCH_QUESTIONS_FAILURE' (state, error) {
         state.questions = {};
     },
 };

@@ -13,6 +13,7 @@
 namespace Applicant\Action;
 
 use Applicant\Loader\CertificationyLoader;
+use Applicant\Model\Category;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -35,7 +36,11 @@ class CategoriesAction implements MiddlewareInterface
 
     public function process(Request $request, DelegateInterface $delegate): JsonResponse
     {
-        $categories = $this->loader->getCategories();
+        $categories = [];
+
+        foreach ($this->loader->getCategories() as $id => $category) {
+            $categories[] = new Category($id, $category);
+        }
 
         return new JsonResponse($categories);
     }

@@ -20,5 +20,5 @@ use Applicant\Action\CategoriesAction;
  */
 $routes = function (Application $application) {
     $application->get('/', FrontAction::class);
-    $application->get('/api/categories', CategoriesAction::class);
+    $application->get('/api/v1/categories', CategoriesAction::class);
 };
