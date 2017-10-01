@@ -1,2 +1,13 @@
+FIG=docker-compose
+
 server:
 	php -S localhost:8080 -t public
+
+start:
+	$(FIG) build
+
+stop:
+	$(FIG) kill
+
+bash:
+	$(FIG) run --rm app

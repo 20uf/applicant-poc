@@ -1,3 +1,21 @@
+# Managed by Composer
 /vendor/
+/composer.phar
+
+# Cache & logs & builds
 /var/
 !/var/.gitkeep
+/public/dist/
+
+# IDE conf
+/.idea
+.buildpath
+.project
+.settings/
+/nbproject
+
+# Managed by npm
+yarn-error.*
+npm-debug.*
+node_modules/
+v8-compile-cache-*

@@ -15,6 +15,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Zend\Expressive\Router\FastRouteRouter;
 use Zend\Expressive\Router\RouterInterface;
+use Applicant\Helper\AssetHelper;
 
 return [
     RouterInterface::class => \DI\get(FastRouteRouter::class),
@@ -27,6 +28,11 @@ return [
 
         return $logger;
     }),
+    AssetHelper::class => DI\object()
+        ->constructor(
+            '../public/build/manifest.json',
+            '/dist/'
+        ),
     YamlLoader::class => DI\object()
         ->constructorParameter('paths', ["../vendor/certificationy/php-pack/data"]),
 ];
