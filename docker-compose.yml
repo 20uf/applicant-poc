@@ -3,11 +3,9 @@ version: '2'
 services:
     app:
         image: dockerphp/nginx:7.1-jessie
-        hostname: worker
         volumes:
             - .:/app
             - /app/var/
             - ./docker/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
         ports:
             - "8080:443"
-

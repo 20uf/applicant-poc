@@ -19,3 +19,6 @@ yarn-error.*
 npm-debug.*
 node_modules/
 v8-compile-cache-*
+
+# Docker
+supervisord.*
