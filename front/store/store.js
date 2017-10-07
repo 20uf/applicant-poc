@@ -11,6 +11,6 @@ export const store = new Vuex.Store({
     modules: {
         categories,
         questions
-    },
-    strict: true
+    }
+    // strict: true
 });

@@ -18,6 +18,7 @@
   "author": "Michael COULLERET <michael.coulleret@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "vee-validate": "^2.0.0-rc.18",
     "vue": "^2.4.2",
     "vue-cli": "^2.8.2",
     "vue-multiselect": "^2.0.3"

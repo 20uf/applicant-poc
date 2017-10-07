@@ -1,5 +1,5 @@
 const state = {
-    value: null,
+    value: [],
     options: [],
     nbQuestions: 20,
 };
@@ -9,26 +9,21 @@ const mutations = {
         state.options = response.data;
     },
     'FETCH_CATEGORIES_FAILURE' (state, error) {
-        state.options = {};
+        state.options = [];
     },
-    'UPDATE_CATEGORIES_VALUE' (state, newCategory) {
-        const category = {
-            name: newCategory,
-            code: newCategory.substring(0, 2) + Math.floor((Math.random() * 10000000))
-        };
-        this.options.push(category);
-        this.value.push(category);
+    'UPDATE_CATEGORIES_VALUE' (state, category) {
+        state.value.push(category[0]);
     },
     'UPDATE_NB_QUESTIONS' (state, nbQuestion) {
         state.nbQuestions = nbQuestion;
-    }
+    },
 };
 
 const getters = {
-    getValue: state => {
+    getCategoriesValue: state => {
         return state.value;
     },
-    getCategories: state => {
+    getCategoriesOptions: state => {
         return state.options;
     },
     getNbQuestions: state => {
@@ -38,12 +33,11 @@ const getters = {
 
 const actions = {
     addCategory ({ commit }, newCategory) {
-        console.log(newCategory);
         commit('UPDATE_CATEGORIES_VALUE', newCategory);
     },
     updateNbQuestions ({ commit }, nbQuestion) {
-        commit('UPDATE_NB_QUESTIONS', nbQuestion)
-    }
+        commit('UPDATE_NB_QUESTIONS', nbQuestion);
+    },
 };
 
 export default {
