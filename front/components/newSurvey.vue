@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-group">
                         <label>Choose one or more categories:</label>
-                        <multiselect v-model="categories" tag-placeholder="Add this as new category" placeholder="Search or add a category" label="name" track-by="code" :options="getCategoriesOptions" :multiple="true" :taggable="true" @tag="addCategory"></multiselect>
+                        <v-select label="name" multiple :options="getCategoriesOptions" :on-change="addCategory"></v-select>
                     </div>
                     <div class="form-group">
                         <label>How many questions do you want?</label>
@@ -29,7 +29,7 @@
 <script>
     import {mapActions, mapGetters } from 'vuex';
     import VeeValidate from 'vee-validate';
-    import multiselect from 'vue-multiselect'
+    import vSelect from "vue-select"
 
     export default {
         data () {
@@ -43,10 +43,6 @@
                 'getNbQuestions',
                 'getCategoriesValue'
             ]),
-            categories: {
-                get () { return this.getCategoriesValue },
-                set (value) { this.addCategory(value) }
-            },
             nbQuestions: {
                 get () { return this.getNbQuestions },
                 set (value) { this.updateNbQuestions(value) }
@@ -57,6 +53,8 @@
                 'addCategory',
                 'updateNbQuestions',
                 'fetchCategories',
+                'postSurvey',
+                'getSurvey'
             ]),
             submitted() {
                 this.errors = [];
@@ -70,17 +68,17 @@
                 }
 
                 if (this.errors.length === 0) {
-                    console.log('success');
+                    let key = this.postSurvey(this.getSurvey);
+
+                    this.$route.router.go('/survey/'+key);
                 }
             }
         },
         components: {
-            multiselect
+            vSelect
         },
         created() {
             this.fetchCategories();
         }
     }
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

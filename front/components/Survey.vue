@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 mx-auto">
-                    <h1>État des workers de {{ $route.params.provider }}</h1>
+                    <h1>{{ survey.question }}</h1>
 
                 </div>
             </div>
@@ -17,16 +17,16 @@
     export default {
         computed: {
             ...mapGetters({
-                questions: 'getQuestions'
+                survey: 'getSurvey'
             })
         },
         methods: {
             ...mapActions({
-                fetchQuestions: 'fetchQuestions'
+                fetchSurvey: 'fetchSurvey'
             }),
         },
         created() {
-            this.fetchQuestions();
+            this.fetchSurvey();
         }
     }
 </script>

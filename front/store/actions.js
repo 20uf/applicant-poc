@@ -7,9 +7,19 @@ export const fetchCategories = ({ commit }) => {
         });
 };
 
-export const fetchQuestions = ({ commit }, categories) => {
-    return Vue.http.get('/api/v1/questions/'+categories)
+export const postSurvey = ({ commit }, payload) => {
+    return Vue.http.post('/api/v1/survey', payload)
         .then(response => {
-            commit('FETCH_QUESTIONS', response);
+            console.log(response);
+            // commit('POST_QUESTIONS', response);
         });
 };
+
+export const fetchSurvey = ({ commit }, payload) => {
+    return Vue.http.post('/api/v1/survey', payload)
+        .then(response => {
+            console.log(response);
+            // commit('POST_QUESTIONS', response);
+        });
+};
+

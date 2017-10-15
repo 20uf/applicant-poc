@@ -19,7 +19,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left">
                             <li>
-                                <router-link :to="{ name: 'categories'}" >New test</router-link>
+                                <router-link :to="{ name: 'home'}" >New test</router-link>
                             </li>
                         </ul>
                     </div>

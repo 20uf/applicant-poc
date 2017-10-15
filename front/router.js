@@ -7,18 +7,12 @@ export default new VueRouter({
     mode: 'hash',
     routes: [
         {
-            path: '/categories',
-            component: require('./components/Categories.vue'),
-            name: 'categories',
-        },
-        {
-            path: '/questions',
-            component: require('./components/Questions.vue'),
-            name: 'questions',
-
+            path: '/survey',
+            component: require('./components/Survey.vue'),
+            name: 'survey',
         }, {
             path: '',
-            component: require('./components/Categories.vue'),
+            component: require('./components/newSurvey.vue'),
             name: 'home'
         }, {
             path: '*',

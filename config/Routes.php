@@ -10,15 +10,20 @@
  * file that was distributed with this source code.
  */
 
+use Applicant\Action\GetSurveyAction;
+use Applicant\Action\PostSurveyAction;
+use Applicant\Action\GetQuestionsAction;
 use Zend\Expressive\Application;
 use Applicant\Action\FrontAction;
-use Applicant\Action\CategoriesAction;
+use Applicant\Action\GetCategoriesAction;
 
 /**
- *
  * @param Application $application
  */
 $routes = function (Application $application) {
     $application->get('/', FrontAction::class);
-    $application->get('/api/v1/categories', CategoriesAction::class);
+    $application->get('/api/v1/categories', GetCategoriesAction::class);
+    $application->get('/api/v1/survey', GetSurveyAction::class);
+    $application->post('/api/v1/survey', PostSurveyAction::class);
+    $application->get('/api/v1/questions', GetQuestionsAction::class);
 };

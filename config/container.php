@@ -33,6 +33,8 @@ return [
             '../public/build/manifest.json',
             '/build/'
         ),
-    YamlLoader::class => DI\object()
-        ->constructorParameter('paths', ["../vendor/certificationy/php-pack/data"]),
+    YamlLoader::class => DI\object()->constructorParameter('paths', ["../vendor/certificationy/php-pack/data"]),
+    Applicant\Dbal\Connection::class => DI\object()->constructor(
+        ['url' => 'sqlite:'.dirname(__FILE__).'/../var/certificationy.sqlite']
+    )
 ];
