@@ -8,7 +8,7 @@ export const fetchCategories = ({ commit }) => {
 };
 
 export const postSurvey = ({ commit }, payload) => {
-    return Vue.http.post('/api/v1/survey', payload)
+    return Vue.http.post('/api/v1/survey', {nbQuestions: 20, categories: {}})
         .then(response => {
             console.log(response);
             // commit('POST_QUESTIONS', response);

@@ -43,6 +43,7 @@ class Connection
         'port' => null,
         'driver' => null,
         'charset' => 'utf8mb4',
+        'url' => null,
     ];
 
     public function __construct(array $config)
@@ -55,6 +56,7 @@ class Connection
      */
     public function createConnection(): DoctrineConnection
     {
+//        var_dump($this->configure()['url']);die;
         $this->connection = DriverManager::getConnection($this->configure());
 
         return $this->connection;
