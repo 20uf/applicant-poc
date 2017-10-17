@@ -32,6 +32,7 @@ const getters = {
         return state.survey.nbQuestions;
     },
     getSurvey: state => {
+        console.log(state.survey);
         return state.survey;
     }
 };

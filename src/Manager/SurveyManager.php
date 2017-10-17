@@ -31,7 +31,6 @@ class SurveyManager
 
     public function create($nbQuestions, $categories): string
     {
-        var_dump($categories);die;
         $stmt = $this->connection->prepare('INSERT INTO survey (nb_questions, categories) VALUES (:nb_questions, :categories)');
 
         $stmt->execute([

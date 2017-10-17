@@ -8,10 +8,10 @@ export const fetchCategories = ({ commit }) => {
 };
 
 export const postSurvey = ({ commit }, payload) => {
-    return Vue.http.post('/api/v1/survey', {nbQuestions: 20, categories: {}})
+    return Vue.http.post('/api/v1/survey', payload, {emulateJSON: true})
         .then(response => {
             console.log(response);
-            // commit('POST_QUESTIONS', response);
+            commit('POST_SURVEY', response);
         });
 };
 
@@ -22,4 +22,3 @@ export const fetchSurvey = ({ commit }, payload) => {
             // commit('POST_QUESTIONS', response);
         });
 };
-

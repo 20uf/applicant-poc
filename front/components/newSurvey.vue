@@ -69,7 +69,6 @@
 
                 if (this.errors.length === 0) {
                     let key = this.postSurvey(this.getSurvey);
-
 //                    this.$route.router.go('/survey/'+key);
                 }
             }
