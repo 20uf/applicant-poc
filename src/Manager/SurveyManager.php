@@ -31,11 +31,17 @@ class SurveyManager
 
     public function create($nbQuestions, $categories): string
     {
+        $categoriesId = [];
+
+        foreach ($categories as $category) {
+            $categoriesId[] = $category['code'];
+        }
+
         $stmt = $this->connection->prepare('INSERT INTO survey (nb_questions, categories) VALUES (:nb_questions, :categories)');
 
         $stmt->execute([
-            'nb_question' => $nbQuestions,
-            'categories'  => $categories
+            'nb_questions' => $nbQuestions,
+            'categories'  => implode(',', $categoriesId)
         ]);
 
         return $this->connection->lastInsertId();

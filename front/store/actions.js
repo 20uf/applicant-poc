@@ -8,17 +8,15 @@ export const fetchCategories = ({ commit }) => {
 };
 
 export const postSurvey = ({ commit }, payload) => {
-    return Vue.http.post('/api/v1/survey', payload, {emulateJSON: true})
+    return Vue.http.post('/api/v1/survey', payload)
         .then(response => {
-            console.log(response);
-            commit('POST_SURVEY', response);
+            // commit('POST_SURVEY', response);
         });
 };
 
 export const fetchSurvey = ({ commit }, payload) => {
     return Vue.http.post('/api/v1/survey', payload)
         .then(response => {
-            console.log(response);
             // commit('POST_QUESTIONS', response);
         });
 };

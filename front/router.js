@@ -8,11 +8,23 @@ export default new VueRouter({
     routes: [
         {
             path: '/survey',
-            component: require('./components/Survey.vue'),
             name: 'survey',
+            component: require('./components/Survey.vue'),
+            children: [
+                {
+                    path: 'start/:id',
+                    name: 'survey_start',
+                    component: require('./components/Questions.vue'),
+                },
+                {
+                    path: 'completed/:id',
+                    name: 'survey_completed',
+                    component: require('./components/Report.vue'),
+                }
+            ]
         }, {
             path: '',
-            component: require('./components/newSurvey.vue'),
+            component: require('./components/NewSurvey.vue'),
             name: 'home'
         }, {
             path: '*',

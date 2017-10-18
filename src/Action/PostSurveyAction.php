@@ -36,8 +36,8 @@ class PostSurveyAction implements MiddlewareInterface
     public function process(Request $request, DelegateInterface $delegate): JsonResponse
     {
         $key = $this->surveyManager->create(
-            $request->withParsedBody('nbQuestions'),
-            $request->withParsedBody('categories')
+            $request->getParsedBody()['nbQuestions'],
+            $request->getParsedBody()['categories']
         );
 
         return new JsonResponse($key);

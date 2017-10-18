@@ -5,6 +5,7 @@ import App from './App.vue'
 import { store } from './store/store'
 
 Vue.use(VueResource);
+Vue.http.options.emulateJSON = true;
 
 export const Application = new Vue({
     el: '#app',
