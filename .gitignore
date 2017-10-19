@@ -4,6 +4,7 @@
 
 # Cache & logs & builds
 /var/
+!/var/data/certificationy.sqlite.dist
 !/var/.gitkeep
 /public/build/
 

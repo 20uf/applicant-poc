@@ -42,7 +42,7 @@ final class Kernel
     /**
      * Run the application.
      */
-    public function run(): void
+    public function run()
     {
         $this->boot();
 
@@ -55,7 +55,7 @@ final class Kernel
     /**
      * Boots the current kernel.
      */
-    public function boot(): void
+    public function boot()
     {
         if (true === $this->booted) {
             return;
@@ -101,7 +101,7 @@ final class Kernel
     /**
      * Initialize container.
      */
-    private function initializeContainer(): void
+    private function initializeContainer()
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions('../config/container.php');

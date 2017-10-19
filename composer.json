@@ -3,6 +3,11 @@
     "description": "Applicant",
     "type": "project",
     "license": "MIT",
+    "config": {
+        "platform": {
+            "php": "7.0"
+        }
+    },
     "authors": [
         {
             "name": "Michael COULLERET",
@@ -17,7 +22,8 @@
         "certificationy/certificationy": "^2.0",
         "certificationy/php-pack": "^1.4",
         "symfony/yaml": "^3.3",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "doctrine/dbal": "^2.5"
     },
     "autoload": {
         "psr-4": {
