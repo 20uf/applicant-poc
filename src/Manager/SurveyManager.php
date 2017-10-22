@@ -32,27 +32,29 @@ class SurveyManager
     public function create($nbQuestions, $categories): string
     {
         $categoriesId = [];
+        $token = md5(uniqid(rand(), true));
 
         foreach ($categories as $category) {
-            $categoriesId[] = $category['code'];
+            $categoriesId[] = $category['name'];
         }
 
-        $stmt = $this->connection->prepare('INSERT INTO survey (nb_questions, categories) VALUES (:nb_questions, :categories)');
+        $stmt = $this->connection->prepare('INSERT INTO survey (nb_questions, categories, token) VALUES (:nb_questions, :categories, :token)');
 
         $stmt->execute([
             'nb_questions' => $nbQuestions,
-            'categories'  => implode(',', $categoriesId)
+            'categories' => implode(',', $categoriesId),
+            'token' => $token,
         ]);
 
-        return $this->connection->lastInsertId();
+        return $token;
     }
 
-    public function getById($id)
+    public function getByToken($token): array
     {
-        $stmt = $this->connection->prepare("SELECT id, nb_question, categories FROM survey WHERE id = :id");
+        $stmt = $this->connection->prepare("SELECT nb_questions, categories FROM survey WHERE token = :token");
 
-        $stmt->execute(['id' => $id]);
+        $stmt->execute(['token' => $token]);
 
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 }

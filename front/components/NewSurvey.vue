@@ -57,7 +57,6 @@
                 'postSurvey'
             ]),
             submitted() {
-                console.log('ok');
                 this.errors = [];
 
                 if (this.getCategoriesValue.length === 0) {
@@ -69,9 +68,10 @@
                 }
 
                 if (this.errors.length === 0) {
-                    let key = this.postSurvey(this.getSurvey);
-
-                    this.$router.push({ name: 'survey_start', params: { key }})
+                    this.postSurvey(this.getSurvey).then(response => {
+                        let token = response.data.token;
+                        this.$router.push({ name: 'survey_start', params: { token: token }});
+                    });
                 }
             }
         },

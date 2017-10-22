@@ -23,7 +23,7 @@ use Applicant\Action\GetCategoriesAction;
 $routes = function (Application $application) {
     $application->get('/', FrontAction::class);
     $application->get('/api/v1/categories', GetCategoriesAction::class);
-    $application->get('/api/v1/survey', GetSurveyAction::class);
+    $application->get('/api/v1/survey/{token}', GetSurveyAction::class);
     $application->post('/api/v1/survey', PostSurveyAction::class);
     $application->get('/api/v1/questions', GetQuestionsAction::class);
 };

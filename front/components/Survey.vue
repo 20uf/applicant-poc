@@ -3,8 +3,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 mx-auto">
-                    <h1>Survey homepage</h1>
-
                     <router-view></router-view>
                 </div>
             </div>
@@ -16,18 +14,18 @@
     import {mapActions, mapGetters} from 'vuex';
 
     export default {
-//        computed: {
-//            ...mapGetters({
-//                survey: 'getSurvey'
-//            })
-//        },
-//        methods: {
-//            ...mapActions({
-//                fetchSurvey: 'fetchSurvey'
-//            }),
-//        },
-//        created() {
-//            this.fetchSurvey();
-//        }
+        data () {
+            return {
+                startedAt: new Date()
+            }
+        },
+        methods: {
+            ...mapActions({
+                fetchSurvey: 'fetchSurvey'
+            }),
+        },
+        created() {
+            this.fetchSurvey(this.$route.params.token);
+        }
     }
 </script>

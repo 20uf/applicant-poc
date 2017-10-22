@@ -12,14 +12,15 @@
 
 namespace Applicant\Action;
 
+use Applicant\Loader\CertificationyLoader;
 use Applicant\Manager\SurveyManager;
+use Applicant\Response\JsonResponse;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Zend\Diactoros\Response\JsonResponse;
 
 /**
- * Survey action.
+ * Survey GET action.
  */
 class GetSurveyAction implements MiddlewareInterface
 {
@@ -28,17 +29,25 @@ class GetSurveyAction implements MiddlewareInterface
      */
     private $surveyManager;
 
-    public function __construct(SurveyManager $surveyManager)
+    /**
+     * @var CertificationyLoader
+     */
+    private $certificationyLoader;
+
+    public function __construct(SurveyManager $surveyManager, CertificationyLoader $certificationyLoader)
     {
         $this->surveyManager = $surveyManager;
+        $this->certificationyLoader = $certificationyLoader;
     }
 
     public function process(Request $request, DelegateInterface $delegate): JsonResponse
     {
-        $survey = $this->surveyManager->getById(
-            $request->getAttribute('id')
+        $survey = $this->surveyManager->getByToken(
+            $request->getAttribute('token')
         );
 
-        return new JsonResponse($survey);
+        $questions = $this->certificationyLoader->getQuestions($survey['nb_questions'], explode(',', $survey['categories']));
+
+        return new JsonResponse($questions);
     }
 }

@@ -19,7 +19,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Diactoros\Response\JsonResponse;
 
 /**
- * Survey action.
+ * Survey POST action.
  */
 class PostSurveyAction implements MiddlewareInterface
 {
@@ -35,11 +35,11 @@ class PostSurveyAction implements MiddlewareInterface
 
     public function process(Request $request, DelegateInterface $delegate): JsonResponse
     {
-        $key = $this->surveyManager->create(
+        $token = $this->surveyManager->create(
             $request->getParsedBody()['nbQuestions'],
             $request->getParsedBody()['categories']
         );
 
-        return new JsonResponse($key);
+        return new JsonResponse(['token' => $token]);
     }
 }

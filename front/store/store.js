@@ -1,14 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import survey from './modules/survey'
-import * as actions from './actions'
+import Survey from './modules/survey';
+import Questions from './modules/questions';
+import * as ApiActions from './api'
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    actions,
+    actions: ApiActions,
     modules: {
-        survey
+        Survey,
+        Questions
     },
     strict: true
 });

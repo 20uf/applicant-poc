@@ -12,12 +12,12 @@ export default new VueRouter({
             component: require('./components/Survey.vue'),
             children: [
                 {
-                    path: 'start/:id',
+                    path: 'start/:token',
                     name: 'survey_start',
                     component: require('./components/Questions.vue'),
                 },
                 {
-                    path: 'completed/:id',
+                    path: 'completed/:token',
                     name: 'survey_completed',
                     component: require('./components/Report.vue'),
                 }
