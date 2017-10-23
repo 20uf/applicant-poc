@@ -8,7 +8,7 @@ const mutations = {
         state.questions = response.data;
     },
     'UPDATE_ANSWER_RESULT' (state, index_answer) {
-        let answer = getAnswer(index_answer, index_answer);
+        let answer = getAnswer(state.index_current_question, index_answer);
 
         if (!("result" in answer)) {
             answer.result = true;
@@ -28,16 +28,17 @@ const getters = {
     },
     currentSurveyQuestion: state => {
         return state.questions[state.index_current_question];
-    },
-    isSelectedAnswer: (state, getters) => (indexAnswer) => {
-        console.log(getAnswer(state.index_current_question, indexAnswer));
-        return getAnswer(state.index_current_question, indexAnswer);
     }
 };
 
 const actions = {
     toSelect: ({ commit }, index) => {
         commit('UPDATE_ANSWER_RESULT', index);
+    },
+    isSelectedAnswer: ({ commit }, indexAnswer) => {
+        let answer = getAnswer(state.index_current_question, indexAnswer);
+        console.log(!("result" in answer) ? false : answer.result);
+        return !("result" in answer) ? false : answer.result
     }
 };
 

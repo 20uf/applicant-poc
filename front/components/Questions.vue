@@ -1,15 +1,21 @@
 <template>
     <section v-if="surveyQuestion">
-        <h3> {{ surveyQuestion.question }}</h3>
-        <div class="form-group">
-            <span class="label label-info">{{ surveyQuestion.category }}</span>
-            <span class="label label-default" v-if="surveyQuestion.multipleChoice">Multiple choice</span>
-            <span class="label label-default" v-else>Single choice</span>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Question #{{ currentIndexQuestion+1 }}
+                <div class="pull-right">
+                    <span class="label label-info">{{ surveyQuestion.category }}</span>
+                    <span class="label label-default" v-if="surveyQuestion.multipleChoice">Multiple choice</span>
+                    <span class="label label-default" v-else>Single choice</span>
+                </div>
+            </div>
+            <div class="panel-body" v-html="$options.filters.nl2br(surveyQuestion.question)"></div>
         </div>
+
         <ul v-for="(answer, index) in surveyQuestion.answers" class="list-unstyled anwers">
-            <li :class="{active: answer.result}" @click="toSelect(index)">
+            <li :class="{active: ''}" @click="toSelect(index)">
                 <highlight-code lang="php" auto>
-                    {{ answer.value }} {{ isSelectedAnswer(index)  }}
+                    {{ answer.value }} {{ surveyQuestion.answers[index] }}
                 </highlight-code>
             </li>
         </ul>
@@ -26,7 +32,7 @@
         computed: {
             ...mapGetters({
                 surveyQuestion: 'currentSurveyQuestion',
-                isSelectedAnswer: 'isSelectedAnswer',
+                currentIndexQuestion: 'currentIndexQuestion',
             }),
         },
         methods: {
@@ -36,10 +42,14 @@
             submitted() {
 //                this.$store.dispatch('SURVEY_QUESTION_SUBMITTED', {});
             },
-//            isSelected: (answer) => {
-//                console.log(answer);
-////                return !("result" in answer) ? false : answer.result
-//            }
+        },
+        filters: {
+            nl2br: function (value) {
+                return value.replace(/(?:\r\n|\r|\n)/g, '<br />');
+            }
+        },
+        updated() {
+            console.log('ok');
         }
     }
 </script>
@@ -56,5 +66,10 @@
 
     .anwers > li.active {
         border-left: 5px solid #5cb85c;
+    }
+
+    pre {
+        background-color: transparent;
+        border: none;
     }
 </style>
