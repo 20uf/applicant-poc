@@ -25,7 +25,10 @@
             }),
         },
         created() {
-            this.fetchSurvey(this.$route.params.token);
+            const token = this.$route.params.token;
+            if (token) {
+                this.fetchSurvey(token);
+            }
         }
     }
 </script>

@@ -40,7 +40,6 @@
                 'toSelect',
             ]),
             submitted() {
-//                this.$store.dispatch('SURVEY_QUESTION_SUBMITTED', {});
             },
         },
         filters: {

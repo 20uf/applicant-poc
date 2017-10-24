@@ -1,9 +1,10 @@
 import Vue from 'vue';
+import * as types from '../mutation-types'
 
 export const fetchCategories = ({ commit }) => {
     return Vue.http.get('/api/v1/categories')
         .then(response => {
-            commit('FETCH_CATEGORIES', response);
+            commit(types.FETCH_CATEGORIES, response);
         });
 };
 
@@ -14,6 +15,6 @@ export const postSurvey = ({ commit }, payload) => {
 export const fetchSurvey = ({ commit }, payload) => {
     return Vue.http.get('/api/v1/survey/'+payload)
         .then(response => {
-            commit('FETCH_SURVEY_QUESTIONS', response);
+            commit(types.FETCH_SURVEY_QUESTIONS, response);
         });
 };

@@ -1,24 +1,11 @@
+import * as types from '../mutation-types'
+
 const state = {
     categoriesOptions: [],
     survey: {
         categories: [],
         nbQuestions: 20,
     }
-};
-
-const mutations = {
-    'FETCH_CATEGORIES' (state, response) {
-        state.categoriesOptions = response.data;
-    },
-    'FETCH_CATEGORIES_FAILURE' (state, error) {
-        state.categoriesOptions = [];
-    },
-    'UPDATE_CATEGORIES_VALUE' (state, category) {
-        state.survey.categories.push(category);
-    },
-    'UPDATE_NB_QUESTIONS' (state, nbQuestion) {
-        state.survey.nbQuestions = nbQuestion;
-    },
 };
 
 const getters = {
@@ -37,11 +24,26 @@ const getters = {
 };
 
 const actions = {
-    addCategory ({ commit }, payload) {
-        commit('UPDATE_CATEGORIES_VALUE', payload.slice(-1).pop());
+    addCategory ({ commit }, category) {
+        commit(types.UPDATE_CATEGORIES_VALUE, category.slice(-1).pop());
     },
-    updateNbQuestions ({ commit }, payload) {
-        commit('UPDATE_NB_QUESTIONS', payload);
+    updateNbQuestions ({ commit }, NbQuestions) {
+        commit(types.UPDATE_NB_QUESTIONS, NbQuestions);
+    },
+};
+
+const mutations = {
+    [types.FETCH_CATEGORIES] (state, response) {
+        state.categoriesOptions = response.data;
+    },
+    [types.FETCH_CATEGORIES_FAILURE] (state) {
+        state.categoriesOptions = [];
+    },
+    [types.UPDATE_CATEGORIES_VALUE] (state, category) {
+        state.survey.categories.push(category);
+    },
+    [types.UPDATE_NB_QUESTIONS] (state, nbQuestion) {
+        state.survey.nbQuestions = nbQuestion;
     },
 };
 

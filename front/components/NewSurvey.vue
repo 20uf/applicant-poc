@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex'
     import VeeValidate from 'vee-validate';
     import vSelect from "vue-select"
 
