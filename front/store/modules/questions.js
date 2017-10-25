@@ -3,6 +3,7 @@ import * as types from '../mutation-types'
 const state = {
     index_current_question: 0,
     questions: [],
+    result: []
 };
 
 const getters = {
@@ -25,7 +26,7 @@ const actions = {
         let answer = getAnswer(state.index_current_question, indexAnswer);
         console.log(!("result" in answer) ? false : answer.result);
         return !("result" in answer) ? false : answer.result
-    }
+    },
 };
 
 const mutations = {
@@ -41,7 +42,7 @@ const mutations = {
             let result = answer.result === true;
             answer.result = !result;
         }
-    }
+    },
 };
 
 function getAnswer(indexQuestion, indexAnswer) {

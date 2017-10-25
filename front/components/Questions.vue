@@ -1,21 +1,21 @@
 <template>
-    <section v-if="surveyQuestion">
+    <section v-if="currentSurveyQuestion">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Question #{{ currentIndexQuestion+1 }}
                 <div class="pull-right">
-                    <span class="label label-info">{{ surveyQuestion.category }}</span>
-                    <span class="label label-default" v-if="surveyQuestion.multipleChoice">Multiple choice</span>
+                    <span class="label label-info">{{ currentSurveyQuestion.category }}</span>
+                    <span class="label label-default" v-if="currentSurveyQuestion.multipleChoice">Multiple choice</span>
                     <span class="label label-default" v-else>Single choice</span>
                 </div>
             </div>
-            <div class="panel-body" v-html="$options.filters.nl2br(surveyQuestion.question)"></div>
+            <div class="panel-body" v-html="$options.filters.nl2br(currentSurveyQuestion.question)"></div>
         </div>
 
-        <ul v-for="(answer, index) in surveyQuestion.answers" class="list-unstyled anwers">
+        <ul v-for="(answer, index) in currentSurveyQuestion.answers" class="list-unstyled anwers">
             <li :class="{active: ''}" @click="toSelect(index)">
                 <highlight-code lang="php" auto>
-                    {{ answer.value }} {{ surveyQuestion.answers[index] }}
+                    {{ answer.value }} {{ currentSurveyQuestion.answers[index] }}
                 </highlight-code>
             </li>
         </ul>
@@ -29,12 +29,16 @@
     import {mapActions, mapGetters } from 'vuex';
 
     export default {
-        computed: {
-            ...mapGetters({
-                surveyQuestion: 'currentSurveyQuestion',
-                currentIndexQuestion: 'currentIndexQuestion',
-            }),
-        },
+        computed: mapGetters([
+            'currentSurveyQuestion',
+            'currentIndexQuestion'
+        ]),
+//        computed: {
+//            ...mapGetters({
+//                surveyQuestion: 'currentSurveyQuestion',
+//                currentIndexQuestion: 'currentIndexQuestion',
+//            }),
+//        },
         methods: {
             ...mapActions([
                 'toSelect',

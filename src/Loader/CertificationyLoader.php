@@ -12,6 +12,7 @@
 
 namespace Applicant\Loader;
 
+use Applicant\Transformer\QuestionsTransformer;
 use Certificationy\Collections\Questions;
 use Certificationy\Loaders\YamlLoader;
 use Psr\Log\LoggerInterface;
@@ -48,7 +49,9 @@ class CertificationyLoader
     public function getQuestions(int $number, array $categories = []) : Questions
     {
         try {
-            return $this->loader->load($number, $categories);
+            $questions = $this->loader->load($number, $categories);
+
+            return (new QuestionsTransformer())->transform($questions);
         } catch (\Exception $exception) {
             $this->logger->critical($exception->getMessage());
             throw $exception;
