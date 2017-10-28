@@ -11,23 +11,19 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex';
+    import { mapActions } from 'vuex';
 
     export default {
-        data () {
-            return {
-                startedAt: new Date()
-            }
-        },
-        methods: {
-            ...mapActions({
-                fetchSurvey: 'fetchSurvey'
-            }),
-        },
+        methods: mapActions([
+            'fetchSurvey'
+        ]),
         created() {
             const token = this.$route.params.token;
+
             if (token) {
                 this.fetchSurvey(token);
+            } else {
+                this.$router.push({ name: 'home' });
             }
         }
     }

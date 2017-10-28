@@ -13,7 +13,6 @@
 namespace Applicant\Transformer;
 
 use Applicant\Model\Question;
-use Certificationy\Answer;
 use Certificationy\Collections\Answers;
 use Certificationy\Collections\Questions;
 
@@ -47,7 +46,7 @@ class QuestionsTransformer
         foreach ($answers as $id => $answer)
         {
             $newAnswer = clone $answer;
-            $newAnswer->setId
+            $newAnswer->setId($id);
         }
 
         return $collectionAnswers;

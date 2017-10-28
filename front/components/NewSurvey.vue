@@ -11,14 +11,22 @@
                     </div>
                     <div class="form-group">
                         <label>Choose one or more categories:</label>
-                        <v-select label="name" multiple :options="getCategoriesOptions" :on-change="addCategory"></v-select>
+                        <v-select label="name" multiple :options="categoriesOptions" :on-change="addCategory"></v-select>
                     </div>
                     <div class="form-group">
                         <label>How many questions do you want?</label>
                         <input class="form-control" v-model="nbQuestions" type="number">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" @click.prevent="submitted">Submit</button>
+                        <label>Review mode?</label>
+                        <toggle-button v-model="reviewMode"/>
+                    </div>
+                    <div class="form-group" v-if="!reviewMode">
+                        <label>Time per question (second)?</label>
+                        <input class="form-control" v-model="timePerQuestion" type="number">
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary" @click.prevent="submitted">Start</button>
                     </div>
                 </div>
             </div>
@@ -39,36 +47,44 @@
         },
         computed: {
             ...mapGetters([
-                'getCategoriesOptions',
-                'getNbQuestions',
-                'getCategoriesValue',
-                'getSurvey'
+                'categoriesOptions',
+                'categoriesValue',
+                'survey'
             ]),
             nbQuestions: {
-                get () { return this.getNbQuestions },
+                get () { return this.$store.getters.nbQuestions },
                 set (value) { this.updateNbQuestions(value) }
+            },
+            reviewMode: {
+                get () { return this.$store.getters.reviewMode },
+                set (value) { this.updateReviewMode(value) }
+            },
+            timePerQuestion: {
+                get () { return this.$store.getters.timePerQuestion },
+                set (value) { this.updateTimePerQuestion(value) }
             }
         },
         methods: {
             ...mapActions([
                 'addCategory',
                 'updateNbQuestions',
+                'updateReviewMode',
                 'fetchCategories',
                 'postSurvey'
             ]),
             submitted() {
                 this.errors = [];
 
-                if (this.getCategoriesValue.length === 0) {
+                if (this.categoriesValue.length === 0) {
                     this.errors.push('You must select at least one category.');
                 }
 
-                if (parseInt(this.getNbQuestions) === 0 || this.getNbQuestions.length === 0) {
+                if (parseInt(this.nbQuestions) === 0 || this.nbQuestions.length === 0) {
                     this.errors.push('You must enter at least one question.');
                 }
 
                 if (this.errors.length === 0) {
-                    this.postSurvey(this.getSurvey).then(response => {
+                    this.postSurvey(this.survey).then(response => {
                         let token = response.data.token;
                         this.$router.push({ name: 'survey_start', params: { token: token }});
                     });

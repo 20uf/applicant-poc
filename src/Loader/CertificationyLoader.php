@@ -49,9 +49,7 @@ class CertificationyLoader
     public function getQuestions(int $number, array $categories = []) : Questions
     {
         try {
-            $questions = $this->loader->load($number, $categories);
-
-            return (new QuestionsTransformer())->transform($questions);
+            return $this->loader->load($number, $categories);
         } catch (\Exception $exception) {
             $this->logger->critical($exception->getMessage());
             throw $exception;
