@@ -48,6 +48,6 @@ class GetSurveyAction implements MiddlewareInterface
 
         $questions = $this->certificationyLoader->getQuestions($survey['nb_questions'], explode(',', $survey['categories']));
 
-        return new JsonResponse($questions);
+        return new JsonResponse($questions->all());
     }
 }

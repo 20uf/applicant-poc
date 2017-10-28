@@ -12,6 +12,7 @@
 
 namespace Applicant\Loader;
 
+use Applicant\Transformer\QuestionsTransformer;
 use Certificationy\Collections\Questions;
 use Certificationy\Loaders\YamlLoader;
 use Psr\Log\LoggerInterface;
