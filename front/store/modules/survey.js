@@ -4,12 +4,13 @@ import * as api from '../api/survey'
 const state = {
     categoriesOptions: [],
     totalTime: 0,
-    startedAt: null,
     survey: {
         categories: [],
         nbQuestions: 20,
         reviewMode: true,
         timePerQuestion: 45, // second
+        startedAt: null,
+        endedAt: null,
     }
 };
 
@@ -59,6 +60,7 @@ const actions = {
         api.fetchCategories(state);
     },
     postSurvey (state, body) {
+        state.commit(types.RESET_REPORT);
         return api.postSurvey(state, body);
     }
 };
@@ -71,7 +73,7 @@ const mutations = {
         state.categoriesOptions = [];
     },
     [types.FETCH_SURVEY_QUESTIONS] (state, response) {
-        state.startedAt = new Date();
+        state.survey.startedAt = new Date();
         state.totalTime = state.survey.timePerQuestion * state.survey.nbQuestions;
         state.survey.nbQuestions = Object.values(response.data).length;
     },
@@ -92,6 +94,9 @@ const mutations = {
     },
     [types.UPDATE_TIME] (state, time) {
         state.totalTime = time;
+    },
+    [types.GO_TO_REPORT] (state) {
+        state.survey.endedAt = new Date();
     }
 };
 

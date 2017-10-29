@@ -2,7 +2,12 @@ import * as types from '../mutation-types'
 
 const state = {
     index_current_question: 0,
-    questions: []
+    questions: [],
+    report: {
+        good: 0,
+        bad: 0,
+        percent: 0
+    }
 };
 
 const getters = {
@@ -14,6 +19,9 @@ const getters = {
     },
     currentSurveyQuestion: state => {
         return state.questions[state.index_current_question];
+    },
+    report: state => {
+        return state.report;
     }
 };
 
@@ -21,7 +29,7 @@ const actions = {
     toSelect: ({ commit }, answer) => {
         commit(types.UPDATE_ANSWER_RESULT, answer);
     },
-    submitted: ({ commit }) => {
+    submit: ({ commit }) => {
         let question = state.questions[state.index_current_question];
 
         commit(types.REMOVE_ALERT_ERRORS, {});
@@ -33,9 +41,10 @@ const actions = {
 
         if (state.questions[state.index_current_question+1] !== undefined) {
             commit(types.GO_TO_NEXT_QUESTION, {});
-            return false;
+            return true;
         }
 
+        commit(types.GO_TO_REPORT, {});
         return true;
     },
     countDownProgress: ({ commit }, time) => {
@@ -72,6 +81,27 @@ const mutations = {
         });
 
         state.questions[state.index_current_question].answers = resultAnswers;
+    },
+    [types.GO_TO_REPORT] (state) {
+        let report = state.report;
+
+        state.questions.forEach(function (answer) {
+            if (answer.result === answer.correct) {
+                report.good++;
+            } else {
+                report.bad++;
+            }
+            report.percent = (report.good * 100) / state.questions.length;
+        });
+
+        state.report = report;
+    },
+    [types.RESET_REPORT] (state) {
+        state.report = {
+            good: 0,
+            bad: 0,
+            percent: 0
+        };
     }
 };
 

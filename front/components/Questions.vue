@@ -48,21 +48,22 @@
             'nbQuestions',
             'errors'
         ]),
-        methods: {
-            ...mapActions([
-                'toSelect',
-                'submitted',
-                'countDownProgress'
-            ]),
-            submit() {
-                if(this.submitted()) {
-                    this.$router.push({ name: 'survey_completed', params: { token: token }});
-                }
-            }
-        },
+        methods: mapActions([
+            'toSelect',
+            'submit',
+            'countDownProgress'
+        ]),
         components: {
             CountDown
         },
+        created() {
+            this.$store.subscribe((mutation) => {
+                if (mutation.type === types.GO_TO_REPORT) {
+                    const token = this.$route.params.token;
+                    this.$router.push({ name: 'survey_completed', params: { token: token }});
+                }
+            });
+        }
     }
 </script>
 

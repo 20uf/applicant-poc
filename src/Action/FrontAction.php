@@ -38,6 +38,7 @@ class FrontAction implements MiddlewareInterface
         $mainCss = $this->assetHelper->getAssetUrl('app.css');
         $mainJs = $this->assetHelper->getAssetUrl('app.js');
 
+        // body oncontextmenu="return false;" ?
         return new HtmlResponse('
             <!DOCTYPE html>
             <html lang="fr">
@@ -48,7 +49,7 @@ class FrontAction implements MiddlewareInterface
                     <title>Applicant Certificationy</title>
                     <link href="'.$mainCss.'" rel="stylesheet">
                 </head>
-                <body>
+                <body onbeforeunload="return false;">
                     <div id="app"></div>
                     <script src="'.$mainJs.'"></script>
                 </body>
