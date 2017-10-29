@@ -6,7 +6,7 @@ const state = {
     totalTime: 0,
     survey: {
         categories: [],
-        nbQuestions: 20,
+        nbQuestions: 3,
         reviewMode: true,
         timePerQuestion: 45, // second
         startedAt: null,
@@ -60,8 +60,10 @@ const actions = {
         api.fetchCategories(state);
     },
     postSurvey (state, body) {
-        state.commit(types.RESET_REPORT);
         return api.postSurvey(state, body);
+    },
+    reset({ commit }) {
+        commit(types.RESET_QUESTIONS);
     }
 };
 

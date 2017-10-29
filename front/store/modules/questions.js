@@ -5,7 +5,6 @@ const state = {
     questions: [],
     report: {
         good: 0,
-        bad: 0,
         percent: 0
     }
 };
@@ -56,6 +55,13 @@ const mutations = {
     [types.FETCH_SURVEY_QUESTIONS] (state, response) {
         state.questions = Object.values(response.data);
     },
+    [types.RESET_QUESTIONS] (state) {
+        state.questions = [];
+        state.report = {
+            good: 0,
+            percent: 0
+        };
+    },
     [types.GO_TO_NEXT_QUESTION] (state) {
         state.index_current_question++;
     },
@@ -85,23 +91,19 @@ const mutations = {
     [types.GO_TO_REPORT] (state) {
         let report = state.report;
 
-        state.questions.forEach(function (answer) {
-            if (answer.result === answer.correct) {
-                report.good++;
-            } else {
-                report.bad++;
-            }
-            report.percent = (report.good * 100) / state.questions.length;
+        state.questions.forEach(function (question) {
+            question.answers.forEach(function (answer) {
+
+                if (answer.result === answer.correct) {
+                    report.good++;
+                }
+
+                report.percent = (report.good * 100) / state.questions.length;
+            });
         });
 
+        state.index_current_question = 0;
         state.report = report;
-    },
-    [types.RESET_REPORT] (state) {
-        state.report = {
-            good: 0,
-            bad: 0,
-            percent: 0
-        };
     }
 };
 

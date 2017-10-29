@@ -69,6 +69,7 @@
                 'addCategory',
                 'updateNbQuestions',
                 'updateReviewMode',
+                'reset',
                 'fetchCategories',
                 'postSurvey'
             ]),
@@ -95,6 +96,7 @@
             vSelect
         },
         created() {
+            this.reset();
             this.fetchCategories();
         }
     }
