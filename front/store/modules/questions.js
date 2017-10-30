@@ -92,20 +92,55 @@ const mutations = {
         let report = state.report;
 
         state.questions.forEach(function (question) {
-            question.answers.forEach(function (answer) {
 
-                if (answer.result === answer.correct) {
+            if (state.questions.multipleChoice) {
+                console.log(isResultCorrectOnMultipleChoice(question.answers));
+                if (isResultCorrectOnMultipleChoice(question.answers)) {
                     report.good++;
                 }
-
-                report.percent = (report.good * 100) / state.questions.length;
-            });
+            } else {
+                if (isResultCorrect(question.answers)) {
+                    report.good++;
+                }
+            }
         });
+
+        report.percent = (report.good * 100) / state.questions.length;
 
         state.index_current_question = 0;
         state.report = report;
     }
 };
+
+function isResultCorrectOnMultipleChoice(answers) {
+    let result = {
+        good: 0,
+        bad: 0
+    };
+
+    answers.forEach(function (answer) {
+        console.log(answer.result === answer.correct);
+        if (answer.result === answer.correct  && answer.correct) {
+            result.good++;
+        } else {
+            result.bad++;
+        }
+    });
+
+    return (result.good > 0 && result.bad === 0);
+}
+
+function isResultCorrect(answers) {
+    let result = false;
+
+    answers.forEach(function (answer) {
+        if (answer.result === answer.correct && answer.correct) {
+            result = true;
+        }
+    });
+
+    return result;
+}
 
 function isResultExists(answers) {
     let result = false;
